@@ -1,3 +1,4 @@
+# Set up the empty board and a label for each column
 BoardList = [[' - ', ' - ', ' - ', ' - ', ' - ', ' - ', ' - '],
              [' - ', ' - ', ' - ', ' - ', ' - ', ' - ', ' - '],
              [' - ', ' - ', ' - ', ' - ', ' - ', ' - ', ' - '],
@@ -8,6 +9,7 @@ BoardList = [[' - ', ' - ', ' - ', ' - ', ' - ', ' - ', ' - '],
              [' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 ']]
 
 
+# Print the board as it currently stands
 def PrintBoard(BoardList):
     for i in BoardList:
         row = ""
@@ -15,11 +17,9 @@ def PrintBoard(BoardList):
             row += j
         print(row)
 
-
+# This function takes in the board list, the column, and the player
+# This is essentially the player's turn. The placing of the piece on the board. 
 def PlacePiece(BoardList, column, player):
-    # need to go into the column and see if the lowest row has a piece
-    # if there is a piece check row above
-    # thinking recursion but idk how i'd do it, it feels wrong tbh
     i = 6
     row = 6
     while i >= 0:
@@ -32,7 +32,8 @@ def PlacePiece(BoardList, column, player):
     # return the location of the piece to check if there is a 4 in a row
     return [row, column]
 
-
+# This function takes in the board list and which player's turn it is. 
+# This function is the input that the player gives in the terminal to make a move.
 def MoveInput(BoardList, Turn):
     # take input of column for the move
     # see if input is a number from 1-7
@@ -60,7 +61,7 @@ def MoveInput(BoardList, Turn):
             # by returning what place piece returned it returns the location of the move
             return PlacePiece(BoardList, column-1, player)
 
-
+# This function checks rows of the board list to see if there is a four in the row or if there are multiple 
 def CheckRows(BoardList):
     Xwins = 0
     Owins = 0
@@ -74,7 +75,7 @@ def CheckRows(BoardList):
             Owins += 1
     return Xwins, Owins
 
-
+# This function checks columns of the board list to see if there is a four in the row or if there are multiple 
 def CheckCols(BoardList):
     Xwins = 0
     Owins = 0
@@ -89,7 +90,7 @@ def CheckCols(BoardList):
             Owins += 1
     return Xwins, Owins
 
-
+# This function checks the number of fours in a row each player has
 def Check4s(set):
     Xwins = 0
     Owins = 0
@@ -102,7 +103,6 @@ def Check4s(set):
         return False
     else:
         return Xwins, Owins
-
 
 def MakeSetDown(BoardList, row, col):
     set = ""
@@ -121,7 +121,7 @@ def MakeSetUp(BoardList, row, col):
         col -= 1
     return set
 
-
+# This function checks for diagonal four in a rows
 def CheckDigs(BoardList):
     Xwins = 0
     Owins = 0
@@ -211,7 +211,7 @@ def CheckDigs(BoardList):
         Owins += OLU7wins
     return Xwins, Owins
 
-
+# This function checks the board for four in a rows
 def Check4InARow(BoardList):
     Xwins = 0
     Owins = 0
@@ -235,7 +235,7 @@ def Check4InARow(BoardList):
     else:
         return Xwins, Owins
 
-
+# This function rotates the board
 def FakeRotateBoard(BoardList):
     NewBoard = []
     col = 6
@@ -249,7 +249,7 @@ def FakeRotateBoard(BoardList):
     NewBoard.append(BoardList[7])
     return NewBoard
 
-
+# This function drops the pieces as if due to gravity
 def Gravity(BoardList):
     NewBoard = []
     for col in range(0, 7):
@@ -267,7 +267,7 @@ def Gravity(BoardList):
     FinalBoard = FakeRotateBoard(NewBoard)
     return FinalBoard
 
-
+# This function rotates the board
 def RotateBoard(BoardList):
     NewBoard = []
     for col in range(0, 7):
@@ -283,7 +283,7 @@ def RotateBoard(BoardList):
     print("The Board Has Rotated Clockwise!!")
     return FinalBoard
 
-
+# This function runs the Connect4 game
 def PlayConnect4ButDifferent(BoardList):
     Turn = 0
     x = False
